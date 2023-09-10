@@ -1,0 +1,22 @@
+.loaderContainer {
+    position:absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    z-index: 10000;
+    background-color: rgba(0, 0, 0, 0.315);
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    width: 150px;
+    height: 150px;
+    margin-left: -75px;
+    margin-top: -75px;
+}

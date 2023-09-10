@@ -1,0 +1,33 @@
+.footerContainer {
+    background-color: #0d112b;
+    color: white;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.footerTitle {
+    margin-bottom: 18px;
+}
+
+.footerLink,.footerText{
+    color: gray;
+    text-decoration-line: none;
+}
+
+.footerLink:hover{
+    color: lightgray;
+}
+
+a.headerLink {
+    color: black;
+}
+
+a:link { text-decoration: none; }
+
+a:visited { text-decoration: none; }
+
+a:hover { text-decoration: none; }
+
+a:active { text-decoration: none; }
