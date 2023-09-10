@@ -2,7 +2,7 @@
   "name": "backoffice",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/Taller-de-Proyectos-2-Tip-Tours/backoffice/",
+  "homepage": "https://taller-de-proyectos-2-tip-tours.github.io/backoffice/",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
