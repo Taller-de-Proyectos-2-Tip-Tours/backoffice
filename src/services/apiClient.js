@@ -1,7 +1,7 @@
 import axios from "axios";
 import CookieService from "./CookieService";
-export const apiClient = axios.create({
-  baseURL: "",
+const apiClient = axios.create({
+  baseURL: "https://tdp2-backend.onrender.com",
   headers: {
     "Accept-Header": "application/json"
   },
@@ -22,3 +22,4 @@ apiClient.interceptors.response.use(
   },
 );
 
+export default apiClient;
