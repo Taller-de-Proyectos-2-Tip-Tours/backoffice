@@ -38,6 +38,10 @@ const TourList = () => {
         getCities()
     },[])
 
+    useEffect(()=>{
+        searchTours()
+    },[filters.city,filters.name])
+
     const getCities = async () => {
         const cities = await apiClient.get('/cities')
         setCities(cities)
@@ -73,6 +77,11 @@ const TourList = () => {
         navigate(constants.ROUTES.TOUR_LIST+'/'+id)
     }
 
+    const tourComments = (id) =>{
+        console.log('editTour',id)
+        navigate(constants.ROUTES.TOUR_LIST+'/'+id+'/comments')
+    }
+
     return (
         <Container>
             <Row style={{ marginBottom:12 }}>
@@ -80,12 +89,6 @@ const TourList = () => {
                     <Button className='primary-button' onClick={createTour}>
                         <FontAwesomeIcon icon={faPlus} className='button-icon'></FontAwesomeIcon>
                         Nuevo Paseo
-                    </Button>
-                </Col>
-                <Col>
-                    <Button className='primary-button' onClick={searchTours}>
-                        <FontAwesomeIcon icon={faRefresh} className='button-icon'></FontAwesomeIcon>
-                        Recargar
                     </Button>
                 </Col>
 
@@ -130,7 +133,7 @@ const TourList = () => {
             {
                 tours&&
                 tours.map((item)=>
-                <Card style={{ width: '50vw',marginBottom:12 }}>
+                <Card style={{ width: '50vw',marginBottom:12 }} key={item._id.$oid}>
                     <Card.Body>
                         <Row>
                             <Col xs={3} md={3}>
@@ -143,6 +146,7 @@ const TourList = () => {
                                     <Row>{'Pendiente de Aprobación'}</Row>
                                 </Card.Text>
                                 <Button variant="primary" onClick={()=>editTour(item._id.$oid)}>Ver Detalle</Button>
+                                <Button variant="primary" style={{marginLeft:8}} onClick={()=>tourComments(item._id.$oid)}>Ver Comentarios</Button>
                             </Col>
                         </Row>
                     </Card.Body>

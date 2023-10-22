@@ -1,0 +1,35 @@
+.new{
+    background-color: #4E598C;
+}
+
+.cancel{
+    background-color: #E32929;
+}
+
+.modal-full-page{
+    background-color:rgba(128, 128, 128, 0.521);
+    display: block;
+    padding-top: 12vh;
+}
+
+.error {
+    color: #E32929;
+    background-color: transparent;
+}
+
+input{
+    height: 100%;
+}
+
+.rmdp-container{
+    width: 100% !important;
+}
+
+.delete-img{
+    background-color: transparent;
+    border-color: transparent;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    right: 6px;
+}

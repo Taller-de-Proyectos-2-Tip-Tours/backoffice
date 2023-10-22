@@ -26,6 +26,8 @@ import Icon from '../../assets/images/LogoOpcion1-imagen 1.png';
 import Home from '../pages/Home/Home';
 import CookieService from '../../services/CookieService';
 import TourList from '../pages/ToursList/ToursList';
+import EditTour from '../pages/EditarTour/EditTour';
+import Comments from '../pages/Comments/Comments.jsx';
 
 
 function Copyright(props) {
@@ -166,6 +168,8 @@ export default function Dashboard() {
                 <Routes>
                   <Route path={Constants.ROUTES.HOME} element={<Home />}></Route>
                   <Route path={Constants.ROUTES.TOUR_LIST} element={<TourList />}></Route>
+                  <Route path={Constants.ROUTES.TOUR} element={<EditTour />}></Route>
+                  <Route path={Constants.ROUTES.TOUR_COMMENT} element={<Comments />}></Route>
                   <Route path='*' element={<Home />} />
                 </Routes>
               </DefaultLayout>
