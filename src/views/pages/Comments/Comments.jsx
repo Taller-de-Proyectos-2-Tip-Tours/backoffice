@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect,useState } from 'react';
-import constants from '../../../assets/constants';
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import './Comments.css';
@@ -16,6 +15,7 @@ import Loader from '../../utils/Loader/Loader';
 import moment from 'moment/moment';
 import Pagination from 'react-bootstrap/Pagination';
 import { Rating } from '@mui/material';
+import Modal from 'react-bootstrap/Modal';
 
 const Comments = () => {
     const navigate = useNavigate();
@@ -30,16 +30,18 @@ const Comments = () => {
     const [pageSize,setPageSize] = useState(5)
     const [cantPages,setPageCant] = useState(0)
 
+    const [modal, showModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState(['']);
+
     useEffect(()=>{
         if(id) getComments()
     },[id])
 
     const getComments = () => {
-        apiClient.get(`/reviews/${id}?state=active`)
+        apiClient.get(`/reviews/${id}`)
         .then((result)=>{
             setComentsToShow(result.slice(page*pageSize,(page+1)*pageSize))
             setPageCant(Math.ceil(result.length/pageSize))
-
             
             console.log('rating',rating)
             setComents([...result])
@@ -71,6 +73,27 @@ const Comments = () => {
         return items
     }
 
+    const deleteComment = async (id)=> {
+        try{
+            setLoading(true)
+            const result = apiClient.delete(`/reviews/${id}`)
+            setLoading(false)
+            setModalMessage(['El comentario fue borrado con Exito'])
+            showModal(true)
+            getComments()
+        } catch (error) {
+            setLoading(false)
+            let errorMsg = []
+            for(const err in error.response.data) {
+                errorMsg.push(`${err}: ${error.response.data[err].join(' ')}`)
+            }
+            setModalMessage(errorMsg)
+            showModal(true)
+            setLoading(false)
+            console.log(error.response.data)
+        }
+    }
+
     return(
         <>
         {rating&&<Row style={{marginTop:12,marginBottom:12,alignItems:'center'}}>
@@ -80,11 +103,12 @@ const Comments = () => {
         <Row style={{justifyContent:'center'}}>
             <h2>Reseñas</h2>
             {commentsToShow&&commentsToShow.map((item,index)=>{
-                return <Card style={{paddingLeft:0,paddingRight:0,maxWidth:600,marginBottom:12}} key={`${item?._id?.$oid}${index}`}>
-                    <Card.Title style={{backgroundColor:'#4E598C',color:'white',paddingLeft:8}}><Row style={{marginTop:4}}><Col>{item.userName}</Col><Col style={{fontSize:16}}>{moment(item.date).format('DD/MM/YYYY HH:ss')}</Col></Row></Card.Title>
+                return <Card style={{paddingLeft:0,paddingRight:0,maxWidth:600,marginBottom:12}} className={item.state==='inactive'?'deactivated-comments':''} key={`${item?._id?.$oid}${index}`}>
+                    <Card.Title style={{color:'white',paddingLeft:8}} className={item.state==='inactive'?'cancel':'commemt'}><Row style={{marginTop:4}} ><Col>{item.userName}</Col><Col style={{fontSize:16}}>{moment(item.date).format('DD/MM/YYYY HH:ss')}</Col></Row></Card.Title>
                     <Card.Body>
                         <Row>{item.comment}</Row>
                         <Row><span style={{justifyContent:'end',display:'flex',alignItems:'center'}}>{item.stars}<FontAwesomeIcon style={{color:'#caca03'}} icon={faStar}></FontAwesomeIcon></span></Row>
+                        {item.state!=='inactive'&&<Row><Col style={{textAlign:'end'}}><Button onClick={()=>deleteComment(item?._id?.$oid)} className="cancel">Desactivar Comentario</Button></Col></Row>}
                     </Card.Body>
                 </Card>
             })}
@@ -107,6 +131,23 @@ const Comments = () => {
             </Pagination>
         }
         {loading&&<Loader></Loader>}
+        {modal&&<div
+                className="modal show modal-full-page"
+            >
+            <Modal.Dialog>
+                <Modal.Header>
+                    <Modal.Title>Edicion del Paseo</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    {modalMessage.map((item)=><p>{item}</p>)}
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={()=>showModal(false)}>Cerrar</Button>
+                </Modal.Footer>
+            </Modal.Dialog>
+            </div>}
         </>
     )
 }
