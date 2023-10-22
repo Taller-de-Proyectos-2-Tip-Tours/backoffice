@@ -77,6 +77,11 @@ const TourList = () => {
         navigate(constants.ROUTES.TOUR_LIST+'/'+id)
     }
 
+    const tourComments = (id) =>{
+        console.log('editTour',id)
+        navigate(constants.ROUTES.TOUR_LIST+'/'+id+'/comments')
+    }
+
     return (
         <Container>
             <Row style={{ marginBottom:12 }}>
@@ -128,7 +133,7 @@ const TourList = () => {
             {
                 tours&&
                 tours.map((item)=>
-                <Card style={{ width: '50vw',marginBottom:12 }}>
+                <Card style={{ width: '50vw',marginBottom:12 }} key={item._id.$oid}>
                     <Card.Body>
                         <Row>
                             <Col xs={3} md={3}>
@@ -141,6 +146,7 @@ const TourList = () => {
                                     <Row>{'Pendiente de Aprobación'}</Row>
                                 </Card.Text>
                                 <Button variant="primary" onClick={()=>editTour(item._id.$oid)}>Ver Detalle</Button>
+                                <Button variant="primary" style={{marginLeft:8}} onClick={()=>tourComments(item._id.$oid)}>Ver Comentarios</Button>
                             </Col>
                         </Row>
                     </Card.Body>
