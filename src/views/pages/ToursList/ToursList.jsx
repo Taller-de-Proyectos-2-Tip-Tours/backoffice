@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import { faPlus, faRefresh, faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faFilter } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom";
 import constants from '../../../assets/constants';
 import Card from 'react-bootstrap/Card';
