@@ -7,6 +7,7 @@ import { Form, Row,Col, Button } from 'react-bootstrap';
 import CookieService from '../../../services/CookieService';
 import { useNavigate } from 'react-router-dom';
 import constants from '../../../assets/constants';
+import md5 from 'md5';
 
 const styles = {
     paperContainer: {
@@ -22,10 +23,9 @@ const Home = () => {
         if(values.userName&&values.pass) {
             const data = {
                 username: values.userName,
-                password: values.pass
+                password: md5(values.pass)
             }
-            const result = await apiClient.post('/admins/login',data)
-            console.log(result)
+            await apiClient.post('/admins/login',data)
             const user = {
                 username: values.userName,
                 token:'asdsfsdfasfd'

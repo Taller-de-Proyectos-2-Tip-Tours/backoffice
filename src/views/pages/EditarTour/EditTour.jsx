@@ -38,7 +38,8 @@ const EditTour = () => {
             puntoDeEncuentroLat:'',
             puntoDeEncuentroLon:'',
             fotoPrincipal:'',
-            fotosSecundarias:[]
+            fotosSecundarias:[],
+            state:'',
         }
     );
 
@@ -63,13 +64,11 @@ const EditTour = () => {
 
     const searchTours = () => {
         setLoading(true)
-        apiClient.get(`/tours`)
+        apiClient.get(`/tours/${id}`)
         .then((result)=>{
             setLoading(false)
-            console.log(id,result.filter((item)=>item._id.$oid===id))
-            const tours = result.filter((item)=>item._id.$oid===id)
-            if(tours&&tours.length>0) {
-                const tour = tours[0];
+            if(result) {
+                const tour = result;
                 console.log(tour.dates)
                 updateValue({
                     tourName:tour.name,
@@ -89,7 +88,8 @@ const EditTour = () => {
                     ciudad:tour.city,
                     puntoDeEncuentro:tour.meetingPoint,
                     fotoPrincipal:tour.mainImage,
-                    fotosSecundarias:tour.otherImages
+                    fotosSecundarias:tour.otherImages,
+                    state:tour.state
                 })
                 const firstStep = tour.stops[0]
                 setPosition({
@@ -125,6 +125,7 @@ const EditTour = () => {
         try {
             setLoading(true)
             const result = await apiClient.put(`/tours/${id}`,data)
+            setLoading(false)
             navigate(-1)
         } catch (error) {
             setLoading(false)
@@ -349,7 +350,7 @@ const EditTour = () => {
                         </Col>
                     )}
                 </Row>
-                <Row>
+                {(values.state==='borrador'||values.state==='pendiente')&&<Row>
                     <Col></Col>
                     <Col></Col>
 
@@ -359,7 +360,7 @@ const EditTour = () => {
                     <Col>
                         <Button className="cancel" onClick={()=>editTour('cancelado')}>Desactivar Paseo</Button>
                     </Col>
-                </Row>
+                </Row>}
                 </Card.Body>
             </Card>
             

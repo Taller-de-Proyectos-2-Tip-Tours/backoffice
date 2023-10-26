@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://taller-de-proyectos-2-tip-tours.github.io/backoffice/",
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "7.21.11",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
@@ -21,6 +22,7 @@
     "js-cookie": "^3.0.5",
     "json-rules-engine": "^6.1.2",
     "mapbox-gl": "^2.15.0",
+    "md5": "^2.3.0",
     "moment": "^2.29.4",
     "primeicons": "^6.0.1",
     "primereact": "^10.0.2",
@@ -34,8 +36,7 @@
     "react-scripts": "^5.0.1",
     "react-scroll-parallax": "^3.4.2",
     "recharts": "^2.6.2",
-    "web-vitals": "^2.1.4",
-    "@babel/plugin-proposal-private-property-in-object":"7.21.11"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
