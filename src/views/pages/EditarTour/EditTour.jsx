@@ -125,6 +125,7 @@ const EditTour = () => {
         try {
             setLoading(true)
             const result = await apiClient.put(`/tours/${id}`,data)
+            setLoading(false)
             navigate(-1)
         } catch (error) {
             setLoading(false)
