@@ -27,11 +27,18 @@ const TourList = () => {
         {
             city:'',
             name:'',
+            state:'',
+            guideEmail:''
         }
     );
 
     const [cities, setCities] = useState([]);
-
+    const states = [
+        'abierto',
+        'borrador',
+        'pendiente',
+        'cancelado',
+    ]
 
     useEffect(()=>{
         searchTours()
@@ -40,7 +47,7 @@ const TourList = () => {
 
     useEffect(()=>{
         searchTours()
-    },[filters.city,filters.name])
+    },[filters.city,filters.name,filters.state,filters.guideEmail])
 
     const getCities = async () => {
         const cities = await apiClient.get('/cities')
@@ -55,6 +62,12 @@ const TourList = () => {
         }
         if(filters.name) {
             params += `&name=${filters.name}`
+        }
+        if(filters.state) {
+            params += `&state=${filters.state}`
+        }
+        if(filters.guideEmail) {
+            params += `&guideEmail=${filters.guideEmail}`
         }
         apiClient.get(`/tours?${params}`)
         .then((result)=>{
@@ -117,13 +130,40 @@ const TourList = () => {
                     </Col>
 
                     <Col>
+                        <Form.Group as={Row} style={{marginLeft:4}} className="mb-3" controlId="guideEmail">
+                            <Form.Control
+                            onChange={(event) => {
+                                updateFilters({guideEmail: event.target.value})
+                            }}
+                            value={filters.guideEmail}
+                            required
+                            type="text"
+                            maxLength={50}
+                            placeholder='Mail del Guía'
+                            />
+                        </Form.Group>
+                    </Col>
+
+                    <Col>
                         <Form.Group as={Row} className="mb-3" controlId="city">
                             <Col >
                                 <Form.Select placeholder='Ciudad' value={filters.city} onChange={(event) => {
                                     updateFilters({ city: event.target.value})
                                 }}>
                                     <option value={''}></option>
-                                    {cities.map((item)=><option value={item.name}>{item.name}</option>)}
+                                    {cities.map((item)=><option key={item.name} value={item.name}>{item.name}</option>)}
+                                </Form.Select>
+                            </Col>
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group as={Row} className="mb-3" controlId="state">
+                            <Col >
+                                <Form.Select placeholder='Estado' value={filters.state} onChange={(event) => {
+                                    updateFilters({ state: event.target.value})
+                                }}>
+                                    <option value={''}></option>
+                                    {states.map((item,index)=><option key={item} value={item}>{item}</option>)}
                                 </Form.Select>
                             </Col>
                         </Form.Group>
