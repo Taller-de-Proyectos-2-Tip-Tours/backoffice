@@ -52,8 +52,9 @@ const Comments = () => {
         if(comments.length>0) {
             let rating = 0
             const notCero = comments.filter((item)=>item.stars!==0)
+            const total = notCero.length
             rating = notCero.map(item=>item.stars).reduce((prev,curr)=>prev+curr)
-            setRating(rating)
+            setRating(rating/total)
         }
     },[comments])
 
