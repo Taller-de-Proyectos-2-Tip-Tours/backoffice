@@ -124,19 +124,27 @@ const EditTour = () => {
         console.log(data)
         try {
             setLoading(true)
+            if(state === 'cancelado') {
+                for(let date of values.fecha) {
+                    await apiClient.put(`tours/cancel?tourId=${id}&isAdmin=true&date=${date.date.format('YYYY-MM-DDTHH:mm:ss')}`)
+                }
+            }
             const result = await apiClient.put(`/tours/${id}`,data)
             setLoading(false)
             navigate(-1)
         } catch (error) {
             setLoading(false)
             let errorMsg = []
-            for(const err in error.response.data) {
-                errorMsg.push(`${err}: ${error.response.data[err].join(' ')}`)
+            if(error.response) {
+                for(const err in error.response.data) {
+                    console.log(err,error)
+                    errorMsg.push(`${err}: ${Array.isArray(error.response.data[err])?error.response.data[err].join(' '):error.response.data[err]}`)
+                }
+                setModalMessage(errorMsg)
+                showModal(true)
+                setLoading(false)
+                console.log(error.response.data)
             }
-            setModalMessage(errorMsg)
-            showModal(true)
-            setLoading(false)
-            console.log(error.response.data)
         }
     }
 
