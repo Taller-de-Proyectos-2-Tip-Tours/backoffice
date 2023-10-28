@@ -350,7 +350,7 @@ const EditTour = () => {
                         </Col>
                     )}
                 </Row>
-                {(values.state==='borrador'||values.state==='pendiente')&&<Row>
+                <Row>
                     <Col></Col>
                     <Col></Col>
 
@@ -360,7 +360,7 @@ const EditTour = () => {
                     <Col>
                         <Button className="cancel" onClick={()=>editTour('cancelado')}>Desactivar Paseo</Button>
                     </Col>
-                </Row>}
+                </Row>
                 </Card.Body>
             </Card>
             
