@@ -31,7 +31,7 @@ const MainListItems = () => {
           cursor:'pointer'
         }}
         >
-          Log Out
+          Cerrar sesión
         </div>
       </>
   )
