@@ -1,7 +1,7 @@
 import React, { useEffect,useState,useReducer } from 'react';
 import { Paper } from '@mui/material';
 import './Home.css';
-import Image from '../../../assets/images/analitycs_image.jpeg';
+import Image from '../../../assets/images/imagen_principal.webp';
 import apiClient from '../../../services/apiClient'
 import { Form, Row,Col, Button } from 'react-bootstrap';
 import CookieService from '../../../services/CookieService';
