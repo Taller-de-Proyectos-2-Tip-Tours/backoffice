@@ -183,7 +183,7 @@ const TourList = () => {
                                 <Card.Title>{item?.name}</Card.Title>
                                 <Card.Text style={{paddingLeft:12}}>
                                     <Row>{item?.description}</Row>
-                                    <Row>{'Pendiente de Aprobación'}</Row>
+                                    <Row>{item.state==='abierto'?'Abierto':item.state==='cancelado'?'Cancelado':'Pendiente de Aprobación'}</Row>
                                 </Card.Text>
                                 <Button variant="primary" onClick={()=>editTour(item._id.$oid)}>Ver Detalle</Button>
                                 <Button variant="primary" style={{marginLeft:8}} onClick={()=>tourComments(item._id.$oid)}>Ver Comentarios</Button>
