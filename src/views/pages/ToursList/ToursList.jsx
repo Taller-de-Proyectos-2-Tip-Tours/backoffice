@@ -36,7 +36,6 @@ const TourList = () => {
     const states = [
         'abierto',
         'borrador',
-        'pendiente',
         'cancelado',
     ]
 
@@ -81,10 +80,6 @@ const TourList = () => {
         })
     }
 
-    const createTour = () => {
-        navigate(constants.ROUTES.NEW_TOUR)
-    }
-
     const editTour = (id) =>{
         console.log('editTour',id)
         navigate(constants.ROUTES.TOUR_LIST+'/'+id)
@@ -98,13 +93,6 @@ const TourList = () => {
     return (
         <Container>
             <Row style={{ marginBottom:12 }}>
-                <Col>
-                    <Button className='primary-button' onClick={createTour}>
-                        <FontAwesomeIcon icon={faPlus} className='button-icon'></FontAwesomeIcon>
-                        Nuevo Paseo
-                    </Button>
-                </Col>
-
                 <Col>
                     <Button className='primary-button' onClick={()=>setShowFilters(!showFilters)}>
                         <FontAwesomeIcon icon={faFilter} className='button-icon'></FontAwesomeIcon>
@@ -150,7 +138,7 @@ const TourList = () => {
                                 <Form.Select placeholder='Ciudad' value={filters.city} onChange={(event) => {
                                     updateFilters({ city: event.target.value})
                                 }}>
-                                    <option value={''}></option>
+                                    <option key='blankChoice' hidden={filters.city===''} value='' >{filters.city===''?'Ciudad':''}</option>
                                     {cities.map((item)=><option key={item.name} value={item.name}>{item.name}</option>)}
                                 </Form.Select>
                             </Col>
@@ -162,7 +150,7 @@ const TourList = () => {
                                 <Form.Select placeholder='Estado' value={filters.state} onChange={(event) => {
                                     updateFilters({ state: event.target.value})
                                 }}>
-                                    <option value={''}></option>
+                                    <option key='blankChoice' hidden={filters.state===''} value='' >{filters.state===''?'Estado':''}</option>
                                     {states.map((item,index)=><option key={item} value={item}>{item}</option>)}
                                 </Form.Select>
                             </Col>
