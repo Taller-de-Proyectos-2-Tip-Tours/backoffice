@@ -49,7 +49,7 @@ const TourList = () => {
     },[filters.city,filters.name,filters.state,filters.guideEmail])
 
     const getCities = async () => {
-        const cities = await apiClient.get('/cities')
+        const cities = await apiClient.get('/cities',{headers:{'token':'admin'}})
         setCities(cities)
     }
 
@@ -68,7 +68,7 @@ const TourList = () => {
         if(filters.guideEmail) {
             params += `&guideEmail=${filters.guideEmail}`
         }
-        apiClient.get(`/tours?${params}`)
+        apiClient.get(`/tours?${params}`,{headers:{'token':'admin'}})
         .then((result)=>{
             console.log(result)
             setTours(result)

@@ -38,7 +38,7 @@ const Comments = () => {
     },[id])
 
     const getComments = () => {
-        apiClient.get(`/reviews/${id}`)
+        apiClient.get(`/reviews/${id}`,{headers:{'token':'admin'}})
         .then((result)=>{
             setComentsToShow(result.slice(page*pageSize,(page+1)*pageSize))
             setPageCant(Math.ceil(result.length/pageSize))
@@ -77,7 +77,7 @@ const Comments = () => {
     const deleteComment = async (id)=> {
         try{
             setLoading(true)
-            const result = apiClient.delete(`/reviews/${id}`)
+            const result = apiClient.delete(`/reviews/${id}`,{headers:{'token':'admin'}})
             setLoading(false)
             setModalMessage(['El comentario fue borrado con Exito'])
             showModal(true)

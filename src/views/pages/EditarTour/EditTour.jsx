@@ -64,7 +64,7 @@ const EditTour = () => {
 
     const searchTours = () => {
         setLoading(true)
-        apiClient.get(`/tours/${id}`)
+        apiClient.get(`/tours/${id}`,{headers:{'token':'admin'}})
         .then((result)=>{
             setLoading(false)
             if(result) {
@@ -113,7 +113,7 @@ const EditTour = () => {
     }
 
     const getCities = async () => {
-        const cities = await apiClient.get('/cities')
+        const cities = await apiClient.get('/cities',{headers:{'token':'admin'}})
         setCities(cities)
     }
 
@@ -126,10 +126,10 @@ const EditTour = () => {
             setLoading(true)
             if(state === 'cancelado') {
                 for(let date of values.fecha) {
-                    await apiClient.put(`tours/cancel?tourId=${id}&isAdmin=true&date=${date.date.format('YYYY-MM-DDTHH:mm:ss')}`)
+                    await apiClient.put(`tours/cancel?tourId=${id}&isAdmin=true&date=${date.date.format('YYYY-MM-DDTHH:mm:ss')}`,{headers:{'token':'admin'}})
                 }
             }
-            const result = await apiClient.put(`/tours/${id}`,data)
+            const result = await apiClient.put(`/tours/${id}`,data,{headers:{'token':'admin'}})
             setLoading(false)
             navigate(-1)
         } catch (error) {
