@@ -156,7 +156,7 @@ const EditTour = () => {
                 <Row>
                     <Col>
                         <Form.Group as={Row} className="mb-3" controlId="description">
-                            <Form.Label column >Descripcion</Form.Label>
+                            <Form.Label column >Descripción</Form.Label>
                             <Col >
                             <Form.Control
                             value={values.description}
@@ -192,7 +192,7 @@ const EditTour = () => {
                 <Row>
                     <Col>
                         <Form.Group as={Row} className="mb-3" controlId="cupoMinimo">
-                            <Form.Label column >Cupo Minimo</Form.Label>
+                            <Form.Label column >Cupo Mínimo</Form.Label>
                             <Col >
                             <Form.Control
                             value={values.cupoMinimo}
@@ -209,7 +209,7 @@ const EditTour = () => {
 
                     <Col>
                         <Form.Group as={Row} className="mb-3" controlId="cupoMaximo">
-                            <Form.Label column >Cupo Maximo</Form.Label>
+                            <Form.Label column >Cupo Máximo</Form.Label>
                             <Col >
                             <Form.Control
                             disabled
@@ -244,7 +244,7 @@ const EditTour = () => {
 
                     <Col>
                         <Form.Group as={Row} className="mb-3" controlId="duracion">
-                            <Form.Label column >Duracion</Form.Label>
+                            <Form.Label column >Duración</Form.Label>
                             <Col >
                             <Form.Control
                             required
