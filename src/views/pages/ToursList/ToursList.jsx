@@ -70,7 +70,7 @@ const TourList = () => {
         }
         apiClient.get(`/tours?${params}`,{headers:{'token':'admin'}})
         .then((result)=>{
-            console.log(result)
+            console.log('searchTours result',result)
             setTours(result)
             setLoading(false);
         })
@@ -181,6 +181,7 @@ const TourList = () => {
                                     </Row>
                                 </Card.Title>
                                 <Card.Text style={{paddingLeft:12}}>
+                                    <Row>Guía: {item.guide.name}, {item.guide.email}</Row>
                                     <Row>{item?.description}</Row>
                                 </Card.Text>
                                 <Button variant="primary" onClick={()=>editTour(item._id.$oid)}>Ver Detalle</Button>

@@ -40,6 +40,7 @@ const EditTour = () => {
             fotoPrincipal:'',
             fotosSecundarias:[],
             state:'',
+            guide:{}
         }
     );
 
@@ -89,7 +90,8 @@ const EditTour = () => {
                     puntoDeEncuentro:tour.meetingPoint,
                     fotoPrincipal:tour.mainImage,
                     fotosSecundarias:tour.otherImages,
-                    state:tour.state
+                    state:tour.state,
+                    guide:tour.guide
                 })
                 const firstStep = tour.stops[0]
                 setPosition({
@@ -151,7 +153,12 @@ const EditTour = () => {
     return (
         <Container>
             <Card>
-                <Card.Title style={{backgroundColor:'#4E598C',color:'white',paddingLeft:12}}>{values.tourName}</Card.Title>
+                <Card.Title style={{backgroundColor:'#4E598C',color:'white',paddingLeft:12}}>
+                    <Row>
+                        <Col>{values.tourName}</Col>
+                        <Col xs={3}>{values.guide?.name}</Col>
+                    </Row>
+                </Card.Title>
                 <Card.Body>
                 <Row>
                     <Col>
