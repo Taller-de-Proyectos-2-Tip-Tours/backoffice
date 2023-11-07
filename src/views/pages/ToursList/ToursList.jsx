@@ -14,6 +14,7 @@ import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
 import Loader from '../../utils/Loader/Loader';
 import Form from 'react-bootstrap/Form';
+import CookieService from '../../../services/CookieService';
 
 const TourList = () => {
     const navigate = useNavigate();
@@ -49,8 +50,18 @@ const TourList = () => {
     },[filters.city,filters.name,filters.state,filters.guideEmail])
 
     const getCities = async () => {
-        const cities = await apiClient.get('/cities',{headers:{'token':'admin'}})
-        setCities(cities)
+        const token = CookieService.get('token')
+        try {
+            const cities = await apiClient.get('/cities',{headers:{'token':token?JSON.parse(token):''}})
+            setCities(cities)
+        } catch (err) {
+            console.error(err)
+            if(err?.response?.status===401) {
+                navigate(constants.ROUTES.HOME)
+                window.location.reload(false);
+            }
+        }
+        
     }
 
     const searchTours = () => {
@@ -68,7 +79,8 @@ const TourList = () => {
         if(filters.guideEmail) {
             params += `&guideEmail=${filters.guideEmail}`
         }
-        apiClient.get(`/tours?${params}`,{headers:{'token':'admin'}})
+        const token = CookieService.get('token')
+        apiClient.get(`/tours?${params}`,{headers:{'token':token?JSON.parse(token):''}})
         .then((result)=>{
             console.log('searchTours result',result)
             setTours(result)
@@ -77,6 +89,10 @@ const TourList = () => {
         .catch(function (error) {
             setLoading(false);
             console.log('searchTours err',error);
+            if(error?.response?.status===401) {
+                navigate(constants.ROUTES.HOME)
+                window.location.reload(false);
+            }
         })
     }
 
