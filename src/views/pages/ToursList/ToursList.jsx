@@ -75,8 +75,8 @@ const TourList = () => {
             setLoading(false);
         })
         .catch(function (error) {
-            console.log(error);
             setLoading(false);
+            console.log('searchTours err',error);
         })
     }
 
@@ -168,10 +168,20 @@ const TourList = () => {
                                 <Image variant="top" src={item?.mainImage} style={{maxWidth:'11vw'}} />
                             </Col>
                             <Col>
-                                <Card.Title>{item?.name}</Card.Title>
+                                <Card.Title>
+                                    <Row>
+                                        <Col>{item?.name}</Col>
+                                        <Col xs={2}  style={{
+                                            backgroundColor:item.state==='abierto'?'green':item.state==='cancelado'?'red':'yellow',
+                                            color:'white',
+                                            display:'flex',
+                                            justifyContent:'center',
+                                            borderRadius:8
+                                        }}>{item.state==='abierto'?'Abierto':item.state==='cancelado'?'Cancelado':'Pendiente de Aprobación'}</Col>
+                                    </Row>
+                                </Card.Title>
                                 <Card.Text style={{paddingLeft:12}}>
                                     <Row>{item?.description}</Row>
-                                    <Row>{item.state==='abierto'?'Abierto':item.state==='cancelado'?'Cancelado':'Pendiente de Aprobación'}</Row>
                                 </Card.Text>
                                 <Button variant="primary" onClick={()=>editTour(item._id.$oid)}>Ver Detalle</Button>
                                 <Button variant="primary" style={{marginLeft:8}} onClick={()=>tourComments(item._id.$oid)}>Ver Comentarios</Button>
