@@ -363,10 +363,10 @@ const EditTour = () => {
                     <Col></Col>
 
                     <Col>
-                        <Button className="new" onClick={()=>editTour('abierto')}>Activar Paseo</Button>
+                        {values.state!=='abierto'&&<Button className="new" onClick={()=>editTour('abierto')}>Activar Paseo</Button>}
                     </Col>
                     <Col>
-                        <Button className="cancel" onClick={()=>editTour('cancelado')}>Desactivar Paseo</Button>
+                        {values.state!=='cancelado'&&<Button className="cancel" onClick={()=>editTour('cancelado')}>Desactivar Paseo</Button>}
                     </Col>
                 </Row>
                 </Card.Body>
