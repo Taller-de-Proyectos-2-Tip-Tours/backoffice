@@ -102,7 +102,7 @@ export default function Dashboard() {
 
   const [user,setUser] = useState(null)
   useEffect(()=>{
-    const user = CookieService.get('user');
+    const user = CookieService.get('token');
     if(user) setUser(JSON.parse(user))
   },[])
 

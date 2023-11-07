@@ -25,12 +25,13 @@ const Home = () => {
                 username: values.userName,
                 password: md5(values.pass)
             }
-            await apiClient.post('/admins/login',data)
+            const result = await apiClient.post('/admins/login',data)
             const user = {
                 username: values.userName,
                 token:'asdsfsdfasfd'
             }
             CookieService.set('user',JSON.stringify(user))
+            CookieService.set('token',JSON.stringify(result.token))
             navigate(constants.ROUTES.HOME)
             window.location.reload(false);
         }
@@ -39,7 +40,7 @@ const Home = () => {
     const [user,setUser] = useState(null)
 
     useEffect(()=>{
-        const user = CookieService.get('user');
+        const user = CookieService.get('token');
         if(user) setUser(user)
     },[])
 

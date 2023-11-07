@@ -17,6 +17,8 @@ import Pagination from 'react-bootstrap/Pagination';
 import { Rating } from '@mui/material';
 import Modal from 'react-bootstrap/Modal';
 import Container from 'react-bootstrap/Container';
+import CookieService from '../../../services/CookieService';
+import constants from '../../../assets/constants';
 
 const Comments = () => {
     const navigate = useNavigate();
@@ -41,7 +43,8 @@ const Comments = () => {
     },[id])
 
     const getTour = () => {
-        apiClient.get(`/tours/${id}`,{headers:{'token':'admin'}})
+        const token = CookieService.get('token')
+        apiClient.get(`/tours/${id}`,{headers:{'token':token?JSON.parse(token):''}})
         .then((result)=>{
             setLoading(false)
             if(result) {
@@ -51,17 +54,28 @@ const Comments = () => {
         .catch(function (error) {
             console.log(error);
             setLoading(false)
+            if(error?.response?.status===401) {
+                navigate(constants.ROUTES.HOME)
+                window.location.reload(false);
+            }
         })
     }
 
     const getComments = () => {
-        apiClient.get(`/reviews/${id}`,{headers:{'token':'admin'}})
+        const token = CookieService.get('token')
+        apiClient.get(`/reviews/${id}`,{headers:{'token':token?JSON.parse(token):''}})
         .then((result)=>{
             setComentsToShow(result.slice(page*pageSize,(page+1)*pageSize))
             setPageCant(Math.ceil(result.length/pageSize))
             
             console.log('rating',rating)
             setComents([...result])
+        }).catch((err)=>{
+            console.error(err)
+            if(err?.response?.status===401) {
+                navigate(constants.ROUTES.HOME)
+                window.location.reload(false);
+            }
         })
     }
 
@@ -94,7 +108,8 @@ const Comments = () => {
     const deleteComment = async (id)=> {
         try{
             setLoading(true)
-            const result = apiClient.delete(`/reviews/${id}`,{headers:{'token':'admin'}})
+            const token = CookieService.get('token')
+            const result = apiClient.delete(`/reviews/${id}`,{headers:{'token':token?JSON.parse(token):''}})
             setLoading(false)
             setModalMessage(['El comentario fue borrado con Exito'])
             showModal(true)
@@ -109,6 +124,10 @@ const Comments = () => {
             showModal(true)
             setLoading(false)
             console.log(error.response.data)
+            if(error?.response?.status===401) {
+                navigate(constants.ROUTES.HOME)
+                window.location.reload(false);
+            }
         }
     }
 

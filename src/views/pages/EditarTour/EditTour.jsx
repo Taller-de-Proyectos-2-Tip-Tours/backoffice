@@ -17,7 +17,7 @@ import Image from 'react-bootstrap/Image';
 import Modal from 'react-bootstrap/Modal';
 import Map, {Marker} from 'react-map-gl';
 import Loader from '../../utils/Loader/Loader'
-
+import CookieService from '../../../services/CookieService';
 
 const EditTour = () => {
     const navigate = useNavigate();
@@ -65,7 +65,8 @@ const EditTour = () => {
 
     const searchTours = () => {
         setLoading(true)
-        apiClient.get(`/tours/${id}`,{headers:{'token':'admin'}})
+        const token = CookieService.get('token')
+        apiClient.get(`/tours/${id}`,{headers:{'token':token?JSON.parse(token):''}})
         .then((result)=>{
             setLoading(false)
             if(result) {
@@ -110,13 +111,27 @@ const EditTour = () => {
         })
         .catch(function (error) {
             console.log(error);
+            if(error.response.status===401) {
+                navigate(constants.ROUTES.HOME)
+                window.location.reload(false);
+            }
             setLoading(false)
         })
     }
 
     const getCities = async () => {
-        const cities = await apiClient.get('/cities',{headers:{'token':'admin'}})
-        setCities(cities)
+        const token = CookieService.get('token')
+        try {
+            const cities = await apiClient.get('/cities',{headers:{'token':token?JSON.parse(token):''}})
+            setCities(cities)
+        } catch (err) {
+            console.error(err)
+            if(err.response.status===401) {
+                navigate(constants.ROUTES.HOME)
+                window.location.reload(false);
+            }
+        }
+        
     }
 
     const editTour = async (state)=> {
@@ -126,12 +141,13 @@ const EditTour = () => {
         console.log(data)
         try {
             setLoading(true)
+            const token = CookieService.get('token')
             if(state === 'cancelado') {
                 for(let date of values.fecha) {
-                    await apiClient.put(`tours/cancel?tourId=${id}&isAdmin=true&date=${date.date.format('YYYY-MM-DDTHH:mm:ss')}`,{headers:{'token':'admin'}})
+                    await apiClient.put(`tours/cancel?tourId=${id}&isAdmin=true&date=${date.date.format('YYYY-MM-DDTHH:mm:ss')}`,{headers:{'token':token?JSON.parse(token):''}})
                 }
             }
-            const result = await apiClient.put(`/tours/${id}`,data,{headers:{'token':'admin'}})
+            const result = await apiClient.put(`/tours/${id}`,data,{headers:{'token':token?JSON.parse(token):''}})
             setLoading(false)
             navigate(-1)
         } catch (error) {
@@ -146,6 +162,10 @@ const EditTour = () => {
                 showModal(true)
                 setLoading(false)
                 console.log(error.response.data)
+            }
+            if(error.response.status===401) {
+                navigate(constants.ROUTES.HOME)
+                window.location.reload(false);
             }
         }
     }
