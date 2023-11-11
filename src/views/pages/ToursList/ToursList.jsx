@@ -188,12 +188,12 @@ const TourList = () => {
                                     <Row>
                                         <Col>{item?.name}</Col>
                                         <Col xs={2}  style={{
-                                            backgroundColor:item.state==='abierto'?'green':item.state==='cancelado'?'red':'yellow',
+                                            backgroundColor:item.state==='abierto'?'green':item.state==='cancelado'?'red':'orange',
                                             color:'white',
                                             display:'flex',
                                             justifyContent:'center',
                                             borderRadius:8
-                                        }}>{item.state==='abierto'?'Abierto':item.state==='cancelado'?'Cancelado':'Pendiente de Aprobación'}</Col>
+                                        }}>{item.state==='abierto'?'Abierto':item.state==='cancelado'?'Cancelado':'Pendiente'}</Col>
                                     </Row>
                                 </Card.Title>
                                 <Card.Text style={{paddingLeft:12}}>
