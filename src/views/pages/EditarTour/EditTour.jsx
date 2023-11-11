@@ -144,7 +144,7 @@ const EditTour = () => {
             const token = CookieService.get('token')
             if(state === 'cancelado') {
                 for(let date of values.fecha) {
-                    await apiClient.put(`tours/cancel?tourId=${id}&isAdmin=true&date=${date.date.format('YYYY-MM-DDTHH:mm:ss')}`,{headers:{'token':token?JSON.parse(token):''}})
+                    await apiClient.put(`tours/cancel?tourId=${id}&isAdmin=true&date=${date.date.format('YYYY-MM-DDTHH:mm:ss')}`,{},{headers:{'token':token?JSON.parse(token):''}})
                 }
             }
             const result = await apiClient.put(`/tours/${id}`,data,{headers:{'token':token?JSON.parse(token):''}})
@@ -163,10 +163,10 @@ const EditTour = () => {
                 setLoading(false)
                 console.log(error.response.data)
             }
-            if(error.response.status===401) {
-                navigate(constants.ROUTES.HOME)
-                window.location.reload(false);
-            }
+            // if(error.response.status===401) {
+            //     navigate(constants.ROUTES.HOME)
+            //     window.location.reload(false);
+            // }
         }
     }
 
