@@ -163,10 +163,10 @@ const EditTour = () => {
                 setLoading(false)
                 console.log(error.response.data)
             }
-            // if(error.response.status===401) {
-            //     navigate(constants.ROUTES.HOME)
-            //     window.location.reload(false);
-            // }
+            if(error.response.status===401) {
+                navigate(constants.ROUTES.HOME)
+                window.location.reload(false);
+            }
         }
     }
 
