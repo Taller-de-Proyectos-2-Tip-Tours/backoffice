@@ -98,7 +98,7 @@ const Comments = () => {
         try{
             setLoading(true)
             const token = CookieService.get('token')
-            const result = apiClient.delete(`/reviews/${id}`,{headers:{'token':token?JSON.parse(token):''}})
+            const result = await apiClient.delete(`/reviews/${id}`,{headers:{'token':token?JSON.parse(token):''}})
             setLoading(false)
             setModalMessage(['El comentario fue borrado con Exito'])
             showModal(true)
