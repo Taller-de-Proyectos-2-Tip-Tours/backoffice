@@ -192,7 +192,8 @@ const TourList = () => {
                                             color:'white',
                                             display:'flex',
                                             justifyContent:'center',
-                                            borderRadius:8
+                                            borderRadius:8,
+                                            minWidth:115,
                                         }}>{item.state==='abierto'?'Abierto':item.state==='cancelado'?'Cancelado':'Pendiente'}</Col>
                                     </Row>
                                 </Card.Title>
