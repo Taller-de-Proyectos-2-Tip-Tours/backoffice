@@ -28,7 +28,7 @@ import CookieService from '../../services/CookieService';
 import TourList from '../pages/ToursList/ToursList';
 import EditTour from '../pages/EditarTour/EditTour';
 import Comments from '../pages/Comments/Comments.jsx';
-
+import Dashboards from '../pages/dashboards/dashboards.jsx'
 
 function Copyright(props) {
   return (
@@ -169,6 +169,7 @@ export default function Dashboard() {
                   <Route path={Constants.ROUTES.TOUR_LIST} element={<TourList />}></Route>
                   <Route path={Constants.ROUTES.TOUR} element={<EditTour />}></Route>
                   <Route path={Constants.ROUTES.TOUR_COMMENT} element={<Comments />}></Route>
+                  <Route path={Constants.ROUTES.DASHBOARD} element={<Dashboards />}></Route>
                   <Route path='*' element={<Home />} />
                 </Routes>
               </DefaultLayout>

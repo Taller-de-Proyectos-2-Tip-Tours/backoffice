@@ -20,6 +20,14 @@ const MainListItems = () => {
             <ListItemText primary="Paseos" />
           </ListItemButton>
         </Link>
+        <Link to={constants.ROUTES.DASHBOARD} style={{color:"white"}}>
+          <ListItemButton>
+            <ListItemIcon style={{color:"white"}}>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItemButton>
+        </Link>
         <div onClick={()=>{
           CookieService.delete('user')
           navigate(constants.ROUTES.HOME)
