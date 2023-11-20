@@ -189,7 +189,7 @@ const MapDashboards = () => {
                             {tour&&
                                 <Popup anchor="top" longitude={tour.stops.lon} latitude={tour.stops.lat}  ref={popupRef} onClose={() => setTour(null)}>
                                     <div>
-                                    {tour.name} | {tour.guide.name}
+                                    {tour.name} | {tour.guide.name} | {tour.averageRating??0}
                                     </div>
                                     <img width="100%" src={tour.mainImage} />
                                 </Popup>
