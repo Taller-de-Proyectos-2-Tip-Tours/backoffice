@@ -43,7 +43,6 @@ const AppEvolution = () => {
         if(filters.to) {
             params += `&end_date=${filters.to}`
         }
-        console.log('getData filters',params)
 
         const token = CookieService.get('token')
         apiClient.get(`/dashboards/evolution?${params}`,{headers:{'token':token?JSON.parse(token):''}})
