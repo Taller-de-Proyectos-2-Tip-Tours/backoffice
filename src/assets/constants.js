@@ -4,6 +4,7 @@ module.exports = {
         TOUR_LIST: '/tours',
         TOUR: '/tours/:id',
         TOUR_COMMENT: '/tours/:id/comments',
+        DASHBOARD: '/dashboard',
     },
     IDIOMAS:[
         'Español',
