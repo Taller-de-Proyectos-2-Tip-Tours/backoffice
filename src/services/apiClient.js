@@ -1,9 +1,11 @@
 import axios from "axios";
 import CookieService from "./CookieService";
+import constants from "../assets/constants";
 const apiClient = axios.create({
   baseURL: "https://tdp2-backend.onrender.com",
   headers: {
-    "Accept-Header": "application/json"
+    "Accept-Header": "application/json",
+    'Authorization':`Bearer ${constants.TOKEN}`
   },
 });
 
