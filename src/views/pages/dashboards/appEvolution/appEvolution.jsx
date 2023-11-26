@@ -61,7 +61,7 @@ const AppEvolution = () => {
             setGuides(guideData)
 
             const travelerData = {
-                id: "Turistas",
+                id: "Viajero",
                 color: "hsl(337, 70%, 50%)",
                 data:result.travelers.map((item)=>{
                     return {
@@ -128,7 +128,7 @@ const AppEvolution = () => {
                             <Form.Group as={Row} style={{marginLeft:4}} className="mb-3" controlId="guideEmail">
                                 <Form.Check 
                                 checked={filters.guides}
-                                label={`Guías`}
+                                label={`Guía`}
                                 onChange={()=>{updateFilters({guides:!filters.guides})}}
                                 />
                             </Form.Group>
@@ -138,7 +138,7 @@ const AppEvolution = () => {
                             <Form.Group as={Row} style={{marginLeft:4}} className="mb-3" controlId="guideEmail">
                                 <Form.Check 
                                 checked={filters.travelers}
-                                label={`Turistas`}
+                                label={`Viejero`}
                                 onChange={()=>{updateFilters({travelers:!filters.travelers})}}
                                 />
                             </Form.Group>
@@ -154,7 +154,7 @@ const AppEvolution = () => {
                                 type: 'linear',
                                 min: 'auto',
                                 max: 'auto',
-                                stacked: true,
+                                stacked: false,
                                 reverse: false
                             }}
                             curve="monotoneX"
@@ -164,7 +164,7 @@ const AppEvolution = () => {
                                 orient: 'bottom',
                                 tickSize: 5,
                                 tickPadding: 5,
-                                tickRotation: 45,
+                                tickRotation: 60,
                                 format: '%Y-%m-%d',
                             }}
                             axisLeft={{
