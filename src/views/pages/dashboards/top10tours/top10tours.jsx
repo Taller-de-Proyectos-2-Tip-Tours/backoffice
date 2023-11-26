@@ -49,9 +49,8 @@ const Top10tours = () => {
             console.log('getData top 10 result',result)
             const topTours = [] 
             for(const tour of result) {
-                const tourData = await apiClient.get('/tours/'+tour.tour,{headers:{'token':token?JSON.parse(token):''}})
                 topTours.push({
-                    paseo:tourData.name,
+                    paseo:tour.tour,
                     reservas:tour.reserves
                 })
             }
@@ -79,7 +78,7 @@ const Top10tours = () => {
                 <Card.Body>
                 <Row style={{ marginBottom:12 }}>
                         <Col>
-                            <Form.Group as={Row} className="mb-3" controlId="name">
+                            <Form.Group as={Row} className="mb-3" controlId="topFrom">
                                 <DatePicker
                                 value={filters.from}
                                 onChange={(date)=>{
@@ -92,7 +91,7 @@ const Top10tours = () => {
                         </Col>
 
                         <Col>
-                            <Form.Group as={Row} style={{marginLeft:4}} className="mb-3" controlId="guideEmail">
+                            <Form.Group as={Row} style={{marginLeft:4}} className="mb-3" controlId="topTo">
                                 <DatePicker
                                 value={filters.to}
                                 onChange={(date)=>updateFilters({to:date})}

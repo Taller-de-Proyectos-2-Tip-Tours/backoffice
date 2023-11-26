@@ -101,7 +101,7 @@ const AppEvolution = () => {
                 <Card.Body>
                     <Row style={{ marginBottom:12 }}>
                         <Col>
-                            <Form.Group as={Row} className="mb-3" controlId="name">
+                            <Form.Group as={Row} className="mb-3" controlId="evolutionFrom">
                                 <DatePicker
                                 value={filters.from}
                                 onChange={(date)=>{
@@ -114,7 +114,7 @@ const AppEvolution = () => {
                         </Col>
 
                         <Col>
-                            <Form.Group as={Row} style={{marginLeft:4}} className="mb-3" controlId="guideEmail">
+                            <Form.Group as={Row} style={{marginLeft:4}} className="mb-3" controlId="evolutionTo">
                                 <DatePicker
                                 value={filters.to}
                                 onChange={(date)=>updateFilters({to:date})}
@@ -125,7 +125,7 @@ const AppEvolution = () => {
                         </Col>
 
                         <Col>
-                            <Form.Group as={Row} style={{marginLeft:4}} className="mb-3" controlId="guideEmail">
+                            <Form.Group as={Row} style={{marginLeft:4}} className="mb-3" controlId="evolutionGuide">
                                 <Form.Check 
                                 checked={filters.guides}
                                 label={`Guía`}
@@ -135,7 +135,7 @@ const AppEvolution = () => {
                         </Col>
 
                         <Col>
-                            <Form.Group as={Row} style={{marginLeft:4}} className="mb-3" controlId="guideEmail">
+                            <Form.Group as={Row} style={{marginLeft:4}} className="mb-3" controlId="evolutionTurist">
                                 <Form.Check 
                                 checked={filters.travelers}
                                 label={`Viejero`}
