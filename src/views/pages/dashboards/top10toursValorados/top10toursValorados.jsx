@@ -74,30 +74,6 @@ const Top10toursValorados = () => {
                                 tickPadding: 5,
                                 tickRotation: 10,
                             }}
-                            legends={[
-                            {
-                                dataFrom: 'keys',
-                                anchor: 'top',
-                                direction: 'column',
-                                justify: false,
-                                translateX: 120,
-                                translateY: 0,
-                                itemsSpacing: 2,
-                                itemWidth: 100,
-                                itemHeight: 20,
-                                itemDirection: 'left-to-right',
-                                itemOpacity: 0.85,
-                                symbolSize: 20,
-                                effects: [
-                                {
-                                    on: 'hover',
-                                    style: {
-                                    itemOpacity: 1,
-                                    },
-                                },
-                                ],
-                            },
-                            ]}
                         />}
                     </Row>
                 </Card.Body>
