@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect,useState,useReducer } from 'react';
 import Container from 'react-bootstrap/Container';
-import './top10tours.css';
+import './top10toursValorados.css';
 import CookieService from '../../../../services/CookieService';
 import apiClient from '../../../../services/apiClient'
 import constants from '../../../../assets/constants';
@@ -15,7 +15,7 @@ import moment from 'moment/moment';
 import DatePicker from "react-multi-date-picker";
 import { ResponsiveBar } from '@nivo/bar';
 
-const Top10tours = () => {
+const Top10toursValorados = () => {
     const navigate = useNavigate();
 
     const [loading,setLoading] = useState(false)
@@ -44,19 +44,15 @@ const Top10tours = () => {
         }
 
         const token = CookieService.get('token')
-        apiClient.get(`/dashboards/tourstopten?${params}`,{headers:{'token':token?JSON.parse(token):''}})
+        apiClient.get(`/dashboards/besttours?${params}`,{headers:{'token':token?JSON.parse(token):''}})
         .then(async (result)=>{
-            console.log('getData top 10 result',result)
-            const topTours = [] 
-            for(const tour of result) {
-                const tourData = await apiClient.get('/tours/'+tour.tour,{headers:{'token':token?JSON.parse(token):''}})
-                topTours.push({
-                    paseo:tourData.name,
-                    reservas:tour.reserves
-                })
-            }
-            console.log('topTours',topTours)
-            setData(topTours)
+            console.log('getData top 10 valorados result',result)
+            setData(result.map((item)=>{
+                return {
+                    Puntuación:item.score,
+                    Paseo:item.tour,
+                }
+            }))
             setLoading(false);
         })
         .catch(function (error) {
@@ -74,7 +70,7 @@ const Top10tours = () => {
             {loading&&<Loader></Loader>}
             <Card>
                 <Card.Title style={{backgroundColor:'#4E598C',color:'white',paddingLeft:12}}>
-                    Top 10 Paseos Reservados
+                    Top 10 Paseos Valorados
                 </Card.Title>
                 <Card.Body>
                 <Row style={{ marginBottom:12 }}>
@@ -105,8 +101,8 @@ const Top10tours = () => {
                     <Row style={{height:'600px'}}>
                         {data&&<ResponsiveBar
                             data={data}
-                            keys={['reservas']}
-                            indexBy="paseo"
+                            keys={['Puntuación']}
+                            indexBy="Paseo"
                             margin={{ top: 50, right: 60, bottom: 50, left: 60 }}
                             padding={0.3}
                             colors={{ scheme: 'nivo' }}
@@ -147,4 +143,4 @@ const Top10tours = () => {
     )
 }
 
-export default Top10tours;
+export default Top10toursValorados;
