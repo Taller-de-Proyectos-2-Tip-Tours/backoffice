@@ -188,10 +188,19 @@ const MapDashboards = () => {
                             }
                             {tour&&
                                 <Popup anchor="top" longitude={tour.stops.lon} latitude={tour.stops.lat}  ref={popupRef} onClose={() => setTour(null)}>
-                                    <div>
-                                    {tour.name} | {tour.guide.name} | {tour.averageRating??0}
-                                    </div>
-                                    <img width="100%" src={tour.mainImage} />
+                                    <Row key={tour._id.$oid}>
+                                        <Col>
+                                            <Card.Title>
+                                                <Row>
+                                                    <Col>{tour?.name}</Col>
+                                                </Row>
+                                            </Card.Title>
+                                            <Card.Text style={{paddingLeft:12}}>
+                                                <Row>Guía: {tour.guide.name}, {tour.guide.email}</Row>
+                                                <Row>{tour?.description}</Row>
+                                            </Card.Text>
+                                        </Col>
+                                    </Row>
                                 </Popup>
                             }
                         </Map>

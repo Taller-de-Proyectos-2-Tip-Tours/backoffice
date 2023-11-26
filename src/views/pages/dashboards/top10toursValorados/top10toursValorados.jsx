@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect,useState,useReducer } from 'react';
+import React, { useEffect,useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import './top10toursValorados.css';
 import CookieService from '../../../../services/CookieService';
@@ -9,42 +9,24 @@ import { useNavigate } from "react-router-dom";
 import Loader from '../../../utils/Loader/Loader';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import moment from 'moment/moment';
-import DatePicker from "react-multi-date-picker";
 import { ResponsiveBar } from '@nivo/bar';
 
 const Top10toursValorados = () => {
     const navigate = useNavigate();
 
     const [loading,setLoading] = useState(false)
-    const [filters, updateFilters] = useReducer(
-        (state, update) => ({ ...state, ...update }),
-        {
-            from:moment().add(-3,'month').format('YYYY-MM-DD'),
-            to:moment().format('YYYY-MM-DD'),
-        }
-    )
+
 
     const [data,setData] = useState(null);
     
     useEffect(()=>{
         getData()
-    },[filters.from,filters.to])
+    },[])
 
     const getData = async () => {
         setLoading(true);
-        let params = ''
-        if(filters.from) {
-            params += `start_date=${filters.from}`
-        }
-        if(filters.to) {
-            params += `&end_date=${filters.to}`
-        }
-
         const token = CookieService.get('token')
-        apiClient.get(`/dashboards/besttours?${params}`,{headers:{'token':token?JSON.parse(token):''}})
+        apiClient.get(`/dashboards/besttours?`,{headers:{'token':token?JSON.parse(token):''}})
         .then(async (result)=>{
             console.log('getData top 10 valorados result',result)
             setData(result.map((item)=>{
@@ -73,31 +55,6 @@ const Top10toursValorados = () => {
                     Top 10 Paseos Valorados
                 </Card.Title>
                 <Card.Body>
-                <Row style={{ marginBottom:12 }}>
-                        <Col>
-                            <Form.Group as={Row} className="mb-3" controlId="name">
-                                <DatePicker
-                                value={filters.from}
-                                onChange={(date)=>{
-                                    updateFilters({from:date})
-                                }}
-                                format="YYYY-MM-DD"
-                                sort
-                                />
-                            </Form.Group>
-                        </Col>
-
-                        <Col>
-                            <Form.Group as={Row} style={{marginLeft:4}} className="mb-3" controlId="guideEmail">
-                                <DatePicker
-                                value={filters.to}
-                                onChange={(date)=>updateFilters({to:date})}
-                                format="YYYY-MM-DD"
-                                sort
-                                />
-                            </Form.Group>
-                        </Col>
-                    </Row>
                     <Row style={{height:'300px'}}>
                         {data&&<ResponsiveBar
                             data={data}
