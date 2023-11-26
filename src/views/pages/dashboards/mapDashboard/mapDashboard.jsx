@@ -174,7 +174,7 @@ const MapDashboards = () => {
                             latitude:  -37.346242,
                             zoom: 3.5
                         }}
-                        style={{width: 700, height: 800}}
+                        style={{width: 400, height: 750}}
                         mapStyle="mapbox://styles/mapbox/streets-v9"
                         >
                             {tours.map((item)=>{

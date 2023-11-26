@@ -107,7 +107,7 @@ const TourList = () => {
     }
 
     return (
-        <Container>
+        <Container style={{marginTop:12}}>
             <Row style={{ marginBottom:12 }}>
                 <Col>
                     <Button className='primary-button' onClick={()=>setShowFilters(!showFilters)}>

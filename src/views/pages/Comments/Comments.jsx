@@ -30,7 +30,7 @@ const Comments = () => {
     const [tour,setTour] = useState(null)
 
     const [page,setPage] = useState(0)
-    const [pageSize,setPageSize] = useState(5)
+    const [pageSize,setPageSize] = useState(4)
     const [cantPages,setPageCant] = useState(0)
 
     const [modal, showModal] = useState(false);
@@ -140,14 +140,14 @@ const Comments = () => {
                     <Row style={{justifyContent:'center'}}>
                         <h2>Reseñas</h2>
                         {commentsToShow&&commentsToShow.map((item,index)=>{
-                            return <Card style={{paddingLeft:0,paddingRight:0,maxWidth:600,marginBottom:12}} className={item.state==='inactive'?'deactivated-comments':''} key={`${item?._id?.$oid}${index}`}>
+                            return <Row style={{justifyContent:'center'}}><Card style={{paddingLeft:0,paddingRight:0,maxWidth:600,marginBottom:12}} className={item.state==='inactive'?'deactivated-comments':''} key={`${item?._id?.$oid}${index}`}>
                                 <Card.Title style={{color:'white',paddingLeft:8}} className={item.state==='inactive'?'cancel':'commemt'}><Row style={{marginTop:4}} ><Col>{item.userName}</Col><Col style={{fontSize:16}}>{moment(item.date).format('DD/MM/YYYY HH:ss')}</Col></Row></Card.Title>
                                 <Card.Body>
                                     <Row>{item.comment}</Row>
                                     <Row><span style={{justifyContent:'end',display:'flex',alignItems:'center'}}>{item.stars}<FontAwesomeIcon style={{color:'#caca03'}} icon={faStar}></FontAwesomeIcon></span></Row>
                                     {item.state!=='inactive'&&<Row><Col style={{textAlign:'end'}}><Button onClick={()=>deleteComment(item?._id?.$oid)} className="cancel">Desactivar Comentario</Button></Col></Row>}
                                 </Card.Body>
-                            </Card>
+                            </Card></Row>
                         })}
                     </Row>
                     {comments&&
