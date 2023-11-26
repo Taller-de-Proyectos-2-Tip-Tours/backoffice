@@ -68,6 +68,12 @@ const Top10toursValorados = () => {
                             labelSkipWidth={12}
                             labelSkipHeight={12}
                             labelTextColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
+                            axisBottom={{
+                                orient: 'bottom',
+                                tickSize: 5,
+                                tickPadding: 5,
+                                tickRotation: 10,
+                            }}
                             legends={[
                             {
                                 dataFrom: 'keys',
