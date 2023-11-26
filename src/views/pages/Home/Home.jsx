@@ -21,19 +21,24 @@ const Home = () => {
     const navigate = useNavigate();
     const onLogin = async () =>{
         if(values.userName&&values.pass) {
-            const data = {
-                username: values.userName,
-                password: md5(values.pass)
+            try {
+                const data = {
+                    username: values.userName,
+                    password: md5(values.pass)
+                }
+                const result = await apiClient.post('/admins/login',data)
+                const user = {
+                    username: values.userName,
+                    token:'asdsfsdfasfd'
+                }
+                CookieService.set('user',JSON.stringify(user))
+                CookieService.set('token',JSON.stringify(result.token))
+                navigate(constants.ROUTES.HOME)
+                window.location.reload(false);
+            } catch (err) {
+                console.log(err,'error login')
             }
-            const result = await apiClient.post('/admins/login',data)
-            const user = {
-                username: values.userName,
-                token:'asdsfsdfasfd'
-            }
-            CookieService.set('user',JSON.stringify(user))
-            CookieService.set('token',JSON.stringify(result.token))
-            navigate(constants.ROUTES.HOME)
-            window.location.reload(false);
+            
         }
     }
 
