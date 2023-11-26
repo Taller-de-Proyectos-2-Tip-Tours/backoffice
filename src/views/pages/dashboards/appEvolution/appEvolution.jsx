@@ -23,7 +23,7 @@ const AppEvolution = () => {
     const [filters, updateFilters] = useReducer(
         (state, update) => ({ ...state, ...update }),
         {
-            from:moment().add(-1,'month').format('YYYY-MM-DD'),
+            from:moment().add(-3,'month').format('YYYY-MM-DD'),
             to:moment().format('YYYY-MM-DD'),
             guides:true,
             travelers:true

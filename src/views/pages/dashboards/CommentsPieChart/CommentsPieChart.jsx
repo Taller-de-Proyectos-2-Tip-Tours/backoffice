@@ -58,7 +58,7 @@ const CommentsPieChart = () => {
             {loading&&<Loader></Loader>}
             <Card>
                 <Card.Title style={{backgroundColor:'#4E598C',color:'white',paddingLeft:12}}>
-                    Top 10 Paseos Valorados
+                    Calidad de Comentarios
                 </Card.Title>
                 <Card.Body>
                     <Row style={{height:'300px'}}>
