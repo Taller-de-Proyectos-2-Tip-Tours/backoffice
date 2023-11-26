@@ -145,7 +145,7 @@ const AppEvolution = () => {
                         </Col>
 
                     </Row>
-                    <Row style={{height:'600px'}}>
+                    <Row style={{height:'300px'}}>
                         {guides&&travelers&&<ResponsiveLine
                             data={getDataDisplay()}
                             margin={{ top: 50, right: 110, bottom: 50, left: 60 }}

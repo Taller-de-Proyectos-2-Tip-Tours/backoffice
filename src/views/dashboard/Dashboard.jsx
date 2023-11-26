@@ -150,7 +150,7 @@ export default function Dashboard() {
             <Divider sx={{ my: 1 }} />
           </List>
         </Drawer>}
-        <Box
+        <div
           component="main"
           sx={{
             
@@ -160,7 +160,7 @@ export default function Dashboard() {
           }}
         >
           <Toolbar />
-          <Container sx={{ mt: 4, mb: 4 }}>
+          <div>
 
             <ParallaxProvider>
               <DefaultLayout>
@@ -175,8 +175,8 @@ export default function Dashboard() {
               </DefaultLayout>
             </ParallaxProvider>
             <Copyright sx={{ pt: 4 }} />
-          </Container>
-        </Box>
+          </div>
+        </div>
       </Box>
     </ThemeProvider>
   );

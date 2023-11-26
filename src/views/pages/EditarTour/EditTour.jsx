@@ -171,7 +171,7 @@ const EditTour = () => {
     }
 
     return (
-        <Container>
+        <Container style={{marginTop:12,width:'88vw'}}>
             <Card>
                 <Card.Title style={{backgroundColor:'#4E598C',color:'white',paddingLeft:12}}>
                     <Row>

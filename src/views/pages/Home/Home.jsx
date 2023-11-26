@@ -13,7 +13,7 @@ const styles = {
     paperContainer: {
         backgroundImage: `url(${Image})`,
         // backgroundRepeat: 'no-repeat'
-        backgroundSize: 'cover'
+        backgroundSize: 'cover',
     }
 };
 

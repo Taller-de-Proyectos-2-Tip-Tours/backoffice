@@ -98,7 +98,7 @@ const Top10toursValorados = () => {
                             </Form.Group>
                         </Col>
                     </Row>
-                    <Row style={{height:'600px'}}>
+                    <Row style={{height:'300px'}}>
                         {data&&<ResponsiveBar
                             data={data}
                             keys={['Puntuación']}

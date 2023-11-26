@@ -61,7 +61,7 @@ const CommentsPieChart = () => {
                     Top 10 Paseos Valorados
                 </Card.Title>
                 <Card.Body>
-                    <Row style={{height:'600px'}}>
+                    <Row style={{height:'300px'}}>
                         {
                             data&&
                             <ResponsivePie
