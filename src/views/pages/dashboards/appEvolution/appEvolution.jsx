@@ -138,7 +138,7 @@ const AppEvolution = () => {
                             <Form.Group as={Row} style={{marginLeft:4}} className="mb-3" controlId="evolutionTurist">
                                 <Form.Check 
                                 checked={filters.travelers}
-                                label={`Viejero`}
+                                label={`Viajero`}
                                 onChange={()=>{updateFilters({travelers:!filters.travelers})}}
                                 />
                             </Form.Group>
