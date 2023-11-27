@@ -23,7 +23,7 @@ const Top10tours = () => {
         (state, update) => ({ ...state, ...update }),
         {
             from:moment().add(-3,'month').format('YYYY-MM-DD'),
-            to:moment().format('YYYY-MM-DD'),
+            to:moment().add(3,'month').format('YYYY-MM-DD'),
         }
     )
 
